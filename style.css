@@ -1,31 +1,101 @@
-h1{
-    color: black;
-    font-weight: bold;
-    font-size: 30pt;
+body {
+  margin: 0;
+}
+header {
+  display: flex;
+  align-items: center;
+  background-color: black;
+  padding: 20px;
 }
 
-.form-container > input{
-    display: block;
-    height: 25px;
-    width: 250px;
-    margin: 10px;
-    font-size: 1.2em;
+h1 {
+  color: whitesmoke;
+  font-weight: bold;
+  font-size: 30pt;
+  flex: 1;
+  margin: 0;
 }
-.form-container > input[type="checkbox"]{
-    display: inline;
-    height: 1em;
-    width: 25px;
-    margin: 0;
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 200px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
 }
-.form-container > label{
-    font-size: 1.5em;
-    margin: 10px;
-    margin: 10px;
+
+.form-container {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 10px 30px;
+  border: 1px solid #888;
+  width: 25%;
 }
-.addBtn{
-    display: block;
-    margin: 10px;
+.form-container > span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.card{
-    border: 4px solid blue;
+.form-container > span > h2 {
+  flex: 1;
+}
+.form-container > span > span {
+  font-size: 1.5em;
+}
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+.form-container > input {
+  display: block;
+  height: 25px;
+  width: 95%;
+  margin: 10px 0;
+  font-size: 1.2em;
+}
+.form-container > input[type="checkbox"] {
+  display: inline;
+  height: 1em;
+  width: 25px;
+  margin: 0;
+}
+.form-container > label {
+  font-size: 1.5em;
+  margin: 0 10px 0 0;
+}
+.btn {
+  display: block;
+  margin: 10px 0;
+  height: 40px;
+  width: 120px;
+  font-size: 1.2em;
+}
+.card {
+  border: 4px solid blue;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: aquamarine;
+  display: flex;
+  flex-direction: column;
+}
+.card>p:last-of-type{
+  flex: 1;
+}
+.card > p{
+  font-size: 18pt;
+  font-weight: bold;
+  margin: 8px;
+} 
+
+.shelf {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  padding: 20px;
 }
