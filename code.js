@@ -31,9 +31,10 @@ function printCard(book) {
     `<p>Title: ${book.title}</p>
     <p>By ${book.author}</p>
     <p>${book.pages} pages</p>
-    <p>${book.read ? "read" : "not read yet"}</p>
     <p>Publish Date: ${book.date}</p>
     <button type="button" class="remove btn">Remove</button>
+    <button type="button" class="read btn ${book.read ? "green" : "red"}">
+    ${book.read ? "Read" : "Not read"}</button>
     </div>`
   );
   shelf.appendChild(card);
@@ -44,14 +45,32 @@ function addBookToLibrary(book) {
 }
 
 function removeCardEvent() {
-  remove.forEach((button) =>
+  remove.forEach((button) => {
     button.addEventListener("click", (e) => {
       const nodesArray = [...document.querySelectorAll(".card")];
       const index = nodesArray.indexOf(e.target.parentElement);
       shelf.removeChild(e.target.parentElement);
       myLibrary.splice(index, 1);
-    })
-  );
+    });
+  });
+}
+
+function readCardEvent() {
+  readBtn.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const nodesArray = [...document.querySelectorAll(".card")];
+      const index = nodesArray.indexOf(e.target.parentElement);
+      if (myLibrary[index].read) {
+        myLibrary[index].read = false;
+        e.target.textContent = "Not read";
+        e.target.classList.replace("green", "red")
+      } else {
+        myLibrary[index].read = true;
+        e.target.textContent = "Read";
+        e.target.classList.replace("red", "green")
+      }
+    });
+  });
 }
 
 const shelf = document.querySelector(".shelf");
@@ -90,6 +109,8 @@ addBtn.addEventListener("click", (event) => {
   myLibrary.forEach(printCard);
   remove = document.querySelectorAll(".remove");
   removeCardEvent();
+  readBtn = document.querySelectorAll(".read");
+  readCardEvent();
   form.reset();
   modal.style.display = "none";
 });
@@ -98,3 +119,7 @@ myLibrary.forEach(printCard);
 
 let remove = document.querySelectorAll(".remove");
 removeCardEvent();
+
+let readBtn = document.querySelectorAll(".read");
+
+readCardEvent();

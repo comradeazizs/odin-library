@@ -99,3 +99,9 @@ h1 {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   padding: 20px;
 }
+.green{
+  background-color: #4ADE80;
+}
+.red{
+  background-color: #F87171;
+}
