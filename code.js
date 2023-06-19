@@ -14,13 +14,18 @@ let myLibrary = [
     date: "1943"
   }
 ];
+class Book {
+  constructor(title, author, pages, read, date) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+    this.date = date;
+  }
 
-function Book(title, author, pages, read, date) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.date = date;
+  addBookToLibrary() {
+    myLibrary.push(this);
+  }
 }
 
 function printCard(book) {
@@ -38,10 +43,6 @@ function printCard(book) {
     </div>`
   );
   shelf.appendChild(card);
-}
-
-function addBookToLibrary(book) {
-  myLibrary.push(book);
 }
 
 function removeCardEvent() {
@@ -63,11 +64,11 @@ function readCardEvent() {
       if (myLibrary[index].read) {
         myLibrary[index].read = false;
         e.target.textContent = "Not read";
-        e.target.classList.replace("green", "red")
+        e.target.classList.replace("green", "red");
       } else {
         myLibrary[index].read = true;
         e.target.textContent = "Read";
-        e.target.classList.replace("red", "green")
+        e.target.classList.replace("red", "green");
       }
     });
   });
@@ -100,13 +101,15 @@ window.onclick = function (event) {
 };
 addBtn.addEventListener("click", (event) => {
   event.preventDefault();
-  addBookToLibrary(
-    new Book(title.value, author.value, pages.value, read.checked, date.value)
+  let newBook = new Book(
+    title.value,
+    author.value,
+    pages.value,
+    read.checked,
+    date.value
   );
-  while (shelf.firstChild) {
-    shelf.removeChild(shelf.firstChild);
-  }
-  myLibrary.forEach(printCard);
+  newBook.addBookToLibrary();
+  printCard(myLibrary[myLibrary.length - 1]);
   remove = document.querySelectorAll(".remove");
   removeCardEvent();
   readBtn = document.querySelectorAll(".read");
