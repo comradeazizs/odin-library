@@ -32,16 +32,14 @@ function printCard(book) {
   const card = document.createElement("div");
   card.classList.add("card");
 
-  card.setHTML(
+  card.innerHTML= 
     `<p>Title: ${book.title}</p>
     <p>By ${book.author}</p>
     <p>${book.pages} pages</p>
     <p>Publish Date: ${book.date}</p>
     <button type="button" class="remove btn">Remove</button>
     <button type="button" class="read btn ${book.read ? "green" : "red"}">
-    ${book.read ? "Read" : "Not read"}</button>
-    </div>`
-  );
+    ${book.read ? "Read" : "Not read"}</button>`;
   shelf.appendChild(card);
 }
 
