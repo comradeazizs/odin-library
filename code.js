@@ -4,15 +4,15 @@ let myLibrary = [
     author: "Jack London",
     pages: 354,
     read: false,
-    date: "1908"
+    date: "1908",
   },
   {
     title: "Kürk Mantolu Madonna",
     author: "Sabahattin Ali",
     pages: "177",
     read: true,
-    date: "1943"
-  }
+    date: "1943",
+  },
 ];
 class Book {
   constructor(title, author, pages, read, date) {
@@ -32,14 +32,14 @@ function printCard(book) {
   const card = document.createElement("div");
   card.classList.add("card");
 
-  card.innerHTML= 
-    `<p>Title: ${book.title}</p>
+  card.innerHTML = `<p>Title: ${book.title}</p>
     <p>By ${book.author}</p>
     <p>${book.pages} pages</p>
     <p>Publish Date: ${book.date}</p>
     <button type="button" class="remove btn">Remove</button>
     <button type="button" class="read btn ${book.read ? "green" : "red"}">
     ${book.read ? "Read" : "Not read"}</button>`;
+  readCardEvent(card);
   shelf.appendChild(card);
 }
 
@@ -54,21 +54,20 @@ function removeCardEvent() {
   });
 }
 
-function readCardEvent() {
-  readBtn.forEach((button) => {
-    button.addEventListener("click", (e) => {
-      const nodesArray = [...document.querySelectorAll(".card")];
-      const index = nodesArray.indexOf(e.target.parentElement);
-      if (myLibrary[index].read) {
-        myLibrary[index].read = false;
-        e.target.textContent = "Not read";
-        e.target.classList.replace("green", "red");
-      } else {
-        myLibrary[index].read = true;
-        e.target.textContent = "Read";
-        e.target.classList.replace("red", "green");
-      }
-    });
+function readCardEvent(card) {
+  button = card.querySelector(".read");
+  button.addEventListener("click", (e) => {
+    const nodesArray = [...document.querySelectorAll(".card")];
+    const index = nodesArray.indexOf(card);
+    if (myLibrary[index].read) {
+      myLibrary[index].read = false;
+      e.target.textContent = "Not read";
+      e.target.classList.replace("green", "red");
+    } else {
+      myLibrary[index].read = true;
+      e.target.textContent = "Read";
+      e.target.classList.replace("red", "green");
+    }
   });
 }
 
@@ -97,6 +96,7 @@ window.onclick = function (event) {
     modal.style.display = "none";
   }
 };
+
 addBtn.addEventListener("click", (event) => {
   event.preventDefault();
   let newBook = new Book(
@@ -110,8 +110,6 @@ addBtn.addEventListener("click", (event) => {
   printCard(myLibrary[myLibrary.length - 1]);
   remove = document.querySelectorAll(".remove");
   removeCardEvent();
-  readBtn = document.querySelectorAll(".read");
-  readCardEvent();
   form.reset();
   modal.style.display = "none";
 });
@@ -120,7 +118,3 @@ myLibrary.forEach(printCard);
 
 let remove = document.querySelectorAll(".remove");
 removeCardEvent();
-
-let readBtn = document.querySelectorAll(".read");
-
-readCardEvent();
